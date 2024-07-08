@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
     "prettier",
     "eslint-config-turbo",
   ],

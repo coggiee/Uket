@@ -14,10 +14,6 @@ const Nav = () => {
   const { pathname } = useLocation();
   const previousPath = usePreviousPath();
 
-  if (pathname === "/signup") {
-    return null;
-  }
-
   return (
     <>
       {["/", "/home"].includes(pathname) ? (

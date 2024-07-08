@@ -20,10 +20,29 @@ export type FestivalUniversityResponse = {
 };
 
 export type UniversityInfo = {
-  universityId: number;
-  name: string;
+  campusName: string;
+  collegeinfourl: string;
+  schoolType: string;
+  link: string;
+  schoolGubun: string;
+  adres: string;
+  schoolName: string;
+  region: string;
+  totalCount: string;
+  estType: string;
+  seq: string;
 };
 
-export type UniversityResponse = {
-  items: UniversityInfo[];
+export type MajorInfo = {
+  lClass: string;
+  facilName: string;
+  majorSeq: string;
+  mClass: string;
+  totalCount: string;
+};
+
+export type UnivOrMajorResponse<T> = {
+  dataSearch: {
+    content: T[];
+  };
 };

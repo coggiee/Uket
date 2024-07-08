@@ -21,8 +21,3 @@ export interface MyTicketListInfoResponse {
 }
 
 export type MyTicketQRCodeResponse = QRCodeType;
-
-export type CancelTicketResponse = {
-  ticketId: number;
-  ticketStatus: string;
-};

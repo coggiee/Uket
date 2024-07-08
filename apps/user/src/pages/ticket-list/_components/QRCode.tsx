@@ -116,7 +116,7 @@ const QRCode = (props: QRCodeProps) => {
           />
           <Separator className="bg-[#5E5E6E]" />
           <footer>
-            <ConfirmModal ticketId={id} />
+            <ConfirmModal />
           </footer>
         </section>
         <DialogFooter className="rounded-lg bg-[#FDC950] py-3 text-center sm:justify-center">

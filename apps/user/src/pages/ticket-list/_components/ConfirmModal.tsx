@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useToast } from "@uket/ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -9,37 +8,12 @@ import {
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
 
-import { useMutationCancelTicket } from "@/hooks/mutations/useMutationCancelTicket";
-
-interface ConfirmModalProps {
-  ticketId: number;
-}
-
-function ConfirmModal(props: ConfirmModalProps) {
-  const { ticketId } = props;
-  const { toast } = useToast();
-
+// TODO: 예매 취소 API 연결 및 예매 취소 후 모달 닫는 로직 추가
+function ConfirmModal() {
   const [open, setOpen] = useState(false);
 
-  const mutation = useMutationCancelTicket();
-
   const handleCancel = () => {
-    mutation.mutate(ticketId, {
-      onSuccess: () => {
-        setOpen(false);
-        toast({
-          title: "티켓 취소 성공!",
-        });
-      },
-      onError: () => {
-        setOpen(false);
-        toast({
-          variant: "destructive",
-          title: "오류",
-          description: "티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.",
-        });
-      },
-    });
+    setOpen(false);
   };
 
   return (
