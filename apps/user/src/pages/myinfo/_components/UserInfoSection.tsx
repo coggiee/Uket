@@ -1,12 +1,10 @@
 import { Switch } from "@uket/ui/components/ui/switch";
 import { Button } from "@uket/ui/components/ui/button";
 
-
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
-import InfoItem from "./InfoItem";
-import InfoContainer from "./InfoContainer";
-import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
+import UnivInfo from "./UnivInfo";
+import GeneralInfo from "./GeneralInfo";
 
 import { useNavigate } from "@/router";
 
@@ -20,9 +18,9 @@ const UserInfoSection = () => {
 
   return (
     <>
-      <div className="flex w-full flex-col items-start gap-5 bg-white px-7 pb-7 pt-5">
+      <div className="flex w-full flex-col items-start gap-5 rounded-xl bg-white p-5">
         <div className="flex items-center gap-6">
-          <div className="relative h-14 w-14">
+          <div className="relative h-11 w-11">
             <img
               src={userInfo.profileImage}
               alt="프로필 이미지"
@@ -34,7 +32,7 @@ const UserInfoSection = () => {
         </div>
         <Button
           variant="outline"
-          className="bg-brand w-full rounded-lg py-6 text-center text-sm font-semibold text-white"
+          className="w-full border-2 border-black py-2 text-center text-sm font-semibold"
           onClick={() => {
             navigate("/ticket-list");
           }}
@@ -42,31 +40,27 @@ const UserInfoSection = () => {
           내 티켓 확인하기
         </Button>
       </div>
-      <section className="flex flex-col gap-2">
-        <GeneralUserInfoContainer
+      <section className="flex flex-col gap-5">
+        <GeneralInfo
           depositorName={userInfo.depositorName}
           phoneNumber={userInfo.phoneNumber}
-          universityName={
-            userInfo.universityName === "일반인"
-              ? userInfo.universityName
-              : "대학생"
-          }
+          universityName={userInfo.universityName}
         />
         {userInfo.universityName !== "일반인" && (
-          <InfoContainer title="학교">
-            <InfoItem title="학교" content={userInfo.universityName} />
-            <InfoItem title="학과" content={userInfo.studentMajor} />
-            <InfoItem title="학번" content={userInfo.studentCode} />
-          </InfoContainer>
+          <UnivInfo
+            universityName={userInfo.universityName}
+            studentMajor={userInfo.studentMajor}
+            studentCode={userInfo.studentCode}
+          />
         )}
-        <InfoContainer title="알림">
-          <div className="flex w-full items-center justify-between">
-            <div className="text-[13px] text-[#5E5E6E]">
-              푸시 알람 동의 여부
-            </div>
+
+        <div className="flex flex-col gap-2">
+          <div className="pl-3 text-sm font-bold">알림</div>
+          <div className="flex w-full items-center justify-between rounded-xl bg-white p-6">
+            <div className="text-xs font-semibold">푸시 알람 동의 여부</div>
             <Switch />
           </div>
-        </InfoContainer>
+        </div>
       </section>
     </>
   );

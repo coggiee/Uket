@@ -19,17 +19,14 @@ export const getShowList = async (id: string | null) => {
     },
   });
 
-  return { reservationUserType: data.reservationUserType, shows: data.shows };
+  return data.shows;
 };
 
-export const getReservationList = async (
-  id: string | null,
-  reservationUserType: string | null,
-) => {
+export const getReservationList = async (id: string | null) => {
   const accessToken = getAccessToken();
 
   const { data } = await instance.get<ReservationInfoResponse>(
-    `/events/shows/${id}/reservations/${reservationUserType}`,
+    `/events/shows/${id}/reservations`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,

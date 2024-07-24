@@ -1,6 +1,5 @@
 import { Button } from "@uket/ui/components/ui/button";
 
-
 import { FormType, useTicketStackForm } from "@/hooks/useTicketStackForm";
 
 import { useTicketFlow } from "@/utils/useTicketFlow";
@@ -34,12 +33,9 @@ const NextButton = (as: NextButtonProps) => {
       navigate(routeUrl as any, { replace: true });
       return;
     } else if (activityName === "CompleteActivity" && form) {
-      try {
-        await onSubmit(form.getValues());
-      } finally {
-        pop();
-        pop();
-      }
+      await onSubmit(form.getValues());
+      pop();
+      pop();
     }
 
     push(activityName, params || {});

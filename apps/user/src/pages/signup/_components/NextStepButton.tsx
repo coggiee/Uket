@@ -1,4 +1,3 @@
-import { LoaderCircleIcon } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
 
 import { useMyFlow } from "@/utils/useMyFlow";
@@ -14,24 +13,14 @@ interface NextStepButtonProps
   params?: {
     form: FormType;
   } & Record<string, unknown>;
-  mutate?: Function;
-  isLoading?: boolean;
 }
 
-const NextStepButton = (props: NextStepButtonProps) => {
-  const { activityName, disabled, params, mutate, isLoading, ...rest } = props;
+const NextStepButton = (as: NextStepButtonProps) => {
+  const { activityName, disabled, params, ...props } = as;
   const { push } = useMyFlow();
   const navigate = useNavigate();
 
-  const handleClick = async () => {
-    if (mutate) {
-      try {
-        await mutate();
-      } catch (error) {
-        return;
-      }
-    }
-
+  const handleClick = () => {
     if (activityName === "MainActivity") {
       navigate("/", {
         replace: true,
@@ -43,12 +32,12 @@ const NextStepButton = (props: NextStepButtonProps) => {
 
   return (
     <Button
-      className="bg-brand hover:bg-brandHover h-16 w-full rounded-none text-base font-extrabold"
+      className="h-16 w-full rounded-none bg-brand text-base font-extrabold hover:bg-brandHover"
       onClick={handleClick}
-      disabled={disabled || isLoading}
-      {...rest}
+      disabled={disabled}
+      {...props}
     >
-      {isLoading ? <LoaderCircleIcon className="animate-spin" /> : "다음으로"}
+      다음으로
     </Button>
   );
 };

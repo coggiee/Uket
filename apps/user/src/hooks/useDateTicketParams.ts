@@ -1,24 +1,37 @@
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+
+interface Params {
+  [key: string]: string;
+}
 
 const useDateTicketParams = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const univName = searchParams.get("univName") as string;
   const univId = searchParams.get("univId") as string;
   const eventId = searchParams.get("eventId") as string;
 
-  const [showId, setShowId] = useState<number>(-1);
-  const handleShowId = (id: number) => {
-    setShowId(id);
+  const setParams = (newParams: Params) => {
+    for (const key in newParams) {
+      searchParams.set(key, newParams[key]);
+    }
+    setSearchParams(searchParams);
+  };
+
+  const setTicketParams = (eventId: string, showId: number) => {
+    setParams({
+      univName,
+      univId,
+      eventId,
+      showId: showId.toString(),
+    });
   };
 
   return {
     univName,
     univId,
     eventId,
-    showId,
-    handleShowId,
+    setTicketParams,
   };
 };
 

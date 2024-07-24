@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
-
 import { useFormatTime } from "@/hooks/useFormatTime";
 
 import TicketQuantityItem from "./TicketQuantityItem";
-import TicketHeader from "./TicketHeader";
-import TicketFooter from "./TicketFooter";
-import TicketDivider from "./TicketDivider";
-import TicketContainer from "./TicketContainer";
-import Overlay from "./Overlay";
+import CircleButton from "./CircleButton";
 
 interface TimeItemProps {
   startTime: string;
@@ -28,53 +22,39 @@ const TimeItem = (props: TimeItemProps) => {
     onSelect,
   } = props;
 
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isSoldOut, setIsSoldOut] = useState(false);
-
-  const leftCount =
-    totalCount - reservedCount < 0 ? 0 : totalCount - reservedCount;
-
-  useEffect(() => {
-    setIsSoldOut(leftCount === 0);
-  }, [leftCount]);
-
-  useEffect(() => {
-    const currentTime = new Date().getTime();
-    const ticketingTime = new Date(startTime).getTime();
-    setIsDisabled(currentTime > ticketingTime);
-  }, [startTime]);
-
   const { formatTime: formatStartTime } = useFormatTime(startTime);
   const { formatTime: formatEndTime } = useFormatTime(endTime);
 
+  const leftCount = totalCount - reservedCount;
+
   return (
-    <div className="relative">
-      {isDisabled && <Overlay />}
-      {isSoldOut && !isDisabled && <Overlay soldOut />}
-      <TicketContainer
-        isDisabled={isDisabled}
-        isSoldOut={isSoldOut}
-        onSelect={onSelect}
-      >
-        <TicketHeader
-          title={`${formatStartTime} ~ ${formatEndTime}`}
-          fontStyle="text-[32px] font-extrabold"
-          isSelected={isSelected}
+    <div
+      className="flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg"
+      onClick={onSelect}
+    >
+      <div className="flex justify-between">
+        <div className="text-[32px] font-extrabold">
+          {formatStartTime} ~ {formatEndTime}
+        </div>
+        <div className="self-center">
+          <CircleButton isSelected={isSelected} />
+        </div>
+      </div>
+
+      <div className="my-[1%] w-full border-[0.5px] border-[#CCCCCC]"></div>
+
+      <div className="flex gap-10 text-xs">
+        <TicketQuantityItem
+          title="남은 티켓 수량"
+          amount={leftCount}
+          color="FD724F"
         />
-        <TicketDivider />
-        <TicketFooter>
-          <TicketQuantityItem
-            title="남은 티켓 수량"
-            amount={leftCount}
-            color="FD724F"
-          />
-          <TicketQuantityItem
-            title="총 티켓 수량"
-            amount={totalCount}
-            color="5E5E6E"
-          />
-        </TicketFooter>
-      </TicketContainer>
+        <TicketQuantityItem
+          title="총 티켓 수량"
+          amount={totalCount}
+          color="5E5E6E"
+        />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Toaster } from "@uket/ui/components/ui/toaster";
 
 import Nav from "@/components/Nav";
 import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
@@ -23,7 +22,6 @@ const App = () => {
           </Redirects>
         </main>
       </section>
-      <Toaster className="bottom-0 right-0" />
     </CriticalErrorBoundary>
   );
 };

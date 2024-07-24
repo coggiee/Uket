@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@uket/ui/components/ui/card";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "@uket/ui/components/ui/dialog";
+import { Button } from "@uket/ui/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
@@ -47,7 +48,7 @@ const QRCode = (props: QRCodeProps) => {
       enterStartTime: formatDate(item.enterStartTime, "time"),
       enterEndTime: formatDate(item.enterEndTime, "time"),
     };
-  }, [data, id]);
+  }, [data]);
 
   const {
     userName,
@@ -65,30 +66,39 @@ const QRCode = (props: QRCodeProps) => {
   } = ticket;
 
   return (
-    <Card className="border-none shadow-none">
-      <CardHeader className="gap-3">
-        <CardTitle>
-          <div className="text-left">
-            <Indicator
-              variant={ticketStatus}
-              title={ticketStatus}
-              rounded
-              className="relative left-0 top-0"
-            />
-          </div>
-        </CardTitle>
-        <CardDescription className="flex flex-col items-center justify-center">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="h-24 w-24 border-none p-0">
           <img
             src={qrCode}
             alt="qrcode"
             width={100}
             height={100}
-            className="aspect-square h-36 w-36 scale-125"
+            className="aspect-square object-cover"
           />
-          <span className="z-50 text-xs text-[#7250FD]">{ticketNo}</span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-xs rounded-lg sm:max-w-md">
+        <DialogHeader className="gap-3">
+          <div className="text-left">
+            <Indicator
+              variant={"darkdeposit"}
+              title={ticketStatus}
+              rounded
+              className="relative left-0 top-0"
+            />
+          </div>
+          <DialogDescription className="flex flex-col items-center justify-center">
+            <img
+              src={qrCode}
+              alt="qrcode"
+              width={100}
+              height={100}
+              className="aspect-square h-36 w-36"
+            />
+            <span className="text-xs text-[#7250FD]">{ticketNo}</span>
+          </DialogDescription>
+        </DialogHeader>
         <section className="flex flex-col gap-3">
           <TicketHeader
             universityName={universityName}
@@ -106,16 +116,16 @@ const QRCode = (props: QRCodeProps) => {
           />
           <Separator className="bg-[#5E5E6E]" />
           <footer>
-            <ConfirmModal ticketId={id} />
+            <ConfirmModal />
           </footer>
         </section>
-      </CardContent>
-      <CardFooter className="mx-5 mb-3 justify-center rounded-lg bg-[#FDC950] py-3">
-        <h1 className="text-sm font-bold">
-          학생증 또는 신분증을 제시해 주세요!
-        </h1>
-      </CardFooter>
-    </Card>
+        <DialogFooter className="rounded-lg bg-[#FDC950] py-3 text-center sm:justify-center">
+          <h1 className="text-sm font-bold">
+            학생증 또는 신분증을 제시해 주세요!
+          </h1>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 export default QRCode;

@@ -12,48 +12,33 @@ import RetryErrorBoundary from "./error/RetryErrorBoundary";
 
 const Nav = () => {
   const { pathname } = useLocation();
-  const [previousPath, popPreviousPath] = usePreviousPath();
-
-  if (pathname === "/signup") {
-    return null;
-  }
-
-  const showLogo = ["/", "/home"].includes(pathname);
-  const showProfile = !["/buy-ticket", "/myinfo", "/login"].includes(pathname);
+  const previousPath = usePreviousPath();
 
   return (
-    <nav
-      className={cn(
-        "my-2 flex h-10 w-full items-center justify-between self-stretch",
-        {
-          container: showLogo,
-          "px-3.5": !showLogo,
-        },
-      )}
-    >
-      {showLogo ? (
-        <>
+    <>
+      {["/", "/home"].includes(pathname) ? (
+        <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
           <Logo />
-          {showProfile && (
-            <RetryErrorBoundary
-              resetKeys={["user-info"]}
-              fallbackComponent={(props: FallbackProps) => (
-                <LoginErrorFallback
-                  className={cn("text-black", pathname === "/" && "text-white")}
-                  {...props}
-                />
-              )}
-            >
-              <Profile />
-            </RetryErrorBoundary>
-          )}
-        </>
+          <RetryErrorBoundary
+            resetKeys={["user-info"]}
+            fallbackComponent={(props: FallbackProps) => (
+              <LoginErrorFallback
+                className={cn("text-black", pathname === "/" && "text-white")}
+                {...props}
+              />
+            )}
+          >
+            <Profile />
+          </RetryErrorBoundary>
+        </nav>
       ) : (
-        <Link to={previousPath} onClick={popPreviousPath}>
-          <IconBack />
-        </Link>
+        <nav className="my-2 flex h-10 w-full items-center justify-between self-stretch pl-[14px]">
+          <Link to={previousPath}>
+            <IconBack />
+          </Link>
+        </nav>
       )}
-    </nav>
+    </>
   );
 };
 
