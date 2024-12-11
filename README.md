@@ -10,7 +10,8 @@
 
 ## Origin repo
 이 레포는 vercel organization 배포 제한 때문에 클론된 레포입니다.
-원본 레포는 [Uket-organization](https://github.com/DCNJ-Uket/Uket-FE) 를 참고해주세요.
+</br>
+실시간 동기화를 지원하지만, 가급적이면 [원본 Uket](https://github.com/DCNJ-Uket/Uket-FE)를 참고해주세요.
 
 ## 기간
 2024.04 - <strong color="dodgerblue">now</strong>
