@@ -8,8 +8,8 @@
 <strong>Uket을 통해 공연 일주일 전, 아티스트가 공개되고 사전 웨이팅을 통해 입장을 진행해 학우분들의 힘든 대기 시간을 줄여주고 그 시간을 더 즐겁게! 즐길 수 있기를 기대해요 😊</strong></br>
 </p>
 
-## Organization link
-https://github.com/DCNJ-Uket/Uket-FE
+## Origin repo
+[Uket-organization](https://github.com/DCNJ-Uket/Uket-FE)
 ## 기간
 2024.04 - <strong color="dodgerblue">now</strong>
 
