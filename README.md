@@ -9,7 +9,7 @@
 </p>
 
 ## Organization link
-https://github.com/DCNJ-Uket/Uket-FE/issues/118
+https://github.com/DCNJ-Uket/Uket-FE
 ## 기간
 2024.04 - <strong color="dodgerblue">now</strong>
 
