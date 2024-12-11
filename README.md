@@ -9,7 +9,9 @@
 </p>
 
 ## Origin repo
-[Uket-organization](https://github.com/DCNJ-Uket/Uket-FE)
+이 레포는 vercel organization 배포 제한 때문에 클론된 레포입니다.
+원본 레포는 [Uket-organization](https://github.com/DCNJ-Uket/Uket-FE) 를 참고해주세요.
+
 ## 기간
 2024.04 - <strong color="dodgerblue">now</strong>
 
