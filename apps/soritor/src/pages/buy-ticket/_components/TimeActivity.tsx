@@ -28,7 +28,7 @@ interface TimeParams extends ActivityParams {
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, univName, showDate, showId } = params;
+  const { form, showDate, univName, showId } = params;
 
   const {
     selectedItem,
@@ -75,6 +75,7 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
               disabled={selectedItem === null}
               params={{
                 univName: univName,
+                showId: showId,
                 showDate: showDate,
                 showTime: formatSelectTime,
                 form,
