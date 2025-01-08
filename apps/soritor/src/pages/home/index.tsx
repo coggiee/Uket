@@ -6,6 +6,7 @@ import { Separator } from "@uket/ui/components/ui/separator";
 import { useNavigate } from "@/router";
 
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
+import DynamicMetaTag from "@/components/DynamicMetaTag";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
 import SectionItem from "./_components/SectionItem";
@@ -13,7 +14,7 @@ import FestivalSection from "./_components/FestivalSection";
 import FestivalDetailSection from "./_components/FestivalDetailSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
-
+// TODO: DynamicMetaTag 하드코딩 수정
 const HomePage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,6 +37,13 @@ const HomePage = () => {
 
   return (
     <main className="relative flex h-full flex-col items-center">
+      <DynamicMetaTag
+        title={`Uket | 소리터`}
+        description={`소리터에서 진행중인 공연을 확인해 보세요!`}
+        image={
+          "https://res.cloudinary.com/dhn3axbhj/image/upload/f_auto,q_auto/jpuywtkkiietiuokytzu"
+        }
+      />
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <header className="mb-5 pt-3 text-3xl font-bold">{univName}</header>
