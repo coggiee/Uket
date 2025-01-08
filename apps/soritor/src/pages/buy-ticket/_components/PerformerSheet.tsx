@@ -15,13 +15,12 @@ const PerformerSheet = (props: PerformerSheetProps) => {
 
   const [inputValue, setInputValue] = useState("");
 
-  const filteredPerformers = [...performers]
-    .filter(name =>
-      inputValue.trim()
-        ? name.toLowerCase().includes(inputValue.toLowerCase())
-        : true,
-    )
-    .sort((a, b) => a.localeCompare(b));
+  const filteredPerformers =
+    inputValue.trim() === ""
+      ? []
+      : performers.filter((name: string) =>
+          name.toLowerCase().includes(inputValue.toLowerCase()),
+        );
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
@@ -30,7 +29,7 @@ const PerformerSheet = (props: PerformerSheetProps) => {
         className="mx-auto max-w-[500px] rounded-t-2xl pt-5"
       >
         <SheetHeader className="w-full">
-          <p className="px-8 text-start text-xs text-slate-500">공연자명</p>
+          <p className="px-8 text-xs text-slate-500">공연자명</p>
           <div className="border-brand flex w-full items-center justify-between border-b-[1px] px-1 pb-1">
             <Search className="h-5 w-5 text-gray-500" />
             <Input
@@ -41,10 +40,7 @@ const PerformerSheet = (props: PerformerSheetProps) => {
             />
             <CircleX
               className="h-5 w-5 text-gray-500"
-              onClick={() => {
-                setInputValue("");
-                onClose();
-              }}
+              onClick={() => setInputValue("")}
             />
           </div>
         </SheetHeader>

@@ -15,5 +15,4 @@ export {
   ChevronsRightIcon,
   ChevronsLeftIcon,
   CircleX,
-  ExternalLink,
 } from "lucide-react";
