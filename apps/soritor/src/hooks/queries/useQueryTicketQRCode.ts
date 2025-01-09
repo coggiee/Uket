@@ -6,6 +6,7 @@ import { TicketItem } from "@/types/ticketType";
 
 import { createBlobURL } from "@/utils/handleTicket";
 
+
 export const useQueryTicketQRCode = (
   ticketId: TicketItem["ticketId"],
   ticketStatus: TicketItem["ticketStatus"],
@@ -16,7 +17,6 @@ export const useQueryTicketQRCode = (
     select: data => {
       return createBlobURL(data);
     },
-    staleTime: 0,
     enabled: !!ticketId && ticketStatus !== "입금 확인중",
   });
 

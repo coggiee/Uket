@@ -5,17 +5,14 @@ import Image from "@/components/Image";
 import { FestivalUniversity } from "@/types/univType";
 
 interface UnivItemProps
-  extends Pick<
-    FestivalUniversity,
-    "logoUrl" | "name" | "eventName" | "startDateTime"
-  > {
+  extends Pick<FestivalUniversity, "logoUrl" | "name" | "startDateTime"> {
   isSelected?: boolean;
   onSelect: () => void;
 }
 
 const UnivItem = (props: UnivItemProps) => {
-  const { isSelected, onSelect, name, eventName, logoUrl } = props;
-  const festivalLogo = logoUrl ? (
+  const { isSelected, onSelect, name, logoUrl } = props;
+  const univLogo = logoUrl ? (
     <Image
       src={logoUrl}
       alt={name}
@@ -40,12 +37,10 @@ const UnivItem = (props: UnivItemProps) => {
           isSelected && "bg-brand/50",
         )}
       >
-        {festivalLogo}
+        {univLogo}
       </div>
       <header className="text-center">
-        <p className="whitespace-wrap font-bold">
-          {eventName}
-        </p>
+        <p className="font-bold">{name}</p>
       </header>
     </div>
   );
