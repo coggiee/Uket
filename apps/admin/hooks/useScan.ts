@@ -1,13 +1,12 @@
 import { AxiosError } from "axios";
 import { IDetectedBarcode } from "@yudiel/react-qr-scanner";
-import { useToast } from "@ui/components/ui/use-toast";
+import { toast } from "@ui/components/ui/use-toast";
 
 import { defineError } from "@/utils/handleError";
 
 import { scanQrCode } from "@/api/ticket";
-export const useScan = () => {
-  const { toast } = useToast();
 
+export const useScan = () => {
   const handleQRScan = async (detectedCodes: IDetectedBarcode[]) => {
     const { rawValue: qrcodeToken } = detectedCodes[0];
 
@@ -16,7 +15,6 @@ export const useScan = () => {
       toast({
         title: `예매자: ${userName}`,
         description: msg,
-        duration: 3000,
       });
     } catch (err) {
       const { errorMessage } = defineError(err as AxiosError);
@@ -24,7 +22,6 @@ export const useScan = () => {
       toast({
         title: errorMessage,
         variant: "destructive",
-        duration: 3000,
       });
     }
   };

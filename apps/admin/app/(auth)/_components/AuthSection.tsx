@@ -9,9 +9,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@ui/components/ui/form";
 import { Button } from "@ui/components/ui/button";
+
 
 import { useLoginForm } from "@/hooks/useLoginForm";
 
@@ -19,24 +19,23 @@ function AuthSection() {
   const { form, onSubmit, error } = useLoginForm();
 
   return (
-    <section className={cn("mt-12 flex grow flex-col gap-11")}>
+    <section className={cn("mt-16 flex grow flex-col gap-11")}>
       <main className="flex flex-col gap-10">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col gap-5"
           >
-            <div className="flex flex-col gap-3 w-full">
+            <div className="flex flex-col gap-3">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="grid w-full items-center gap-1.5 md:w-full">
+                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs">
                     <FormLabel className="text-[#5E5E6E]">ID</FormLabel>
                     <FormControl>
                       <Input id="id" placeholder="아이디" {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -44,7 +43,7 @@ function AuthSection() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="grid w-full items-center gap-1.5 md:w-full">
+                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs md:w-full">
                     <FormLabel className="text-[#5E5E6E]">PW</FormLabel>
                     <FormControl>
                       <Input
@@ -54,14 +53,13 @@ function AuthSection() {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
             <div className="space-y-4">
-              <p className="h-5 text-center text-sm text-[#EF4444] sm:text-left">
-                {error && <span>{error}</span>}
+              <p className="h-5 text-center text-sm text-[#FD7250] sm:text-left">
+                {error && error}
               </p>
               <Button
                 type="submit"
