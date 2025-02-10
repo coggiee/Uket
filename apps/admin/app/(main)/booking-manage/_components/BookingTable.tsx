@@ -23,42 +23,60 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { TICKET_STATUS } from "@/constants/ticketStatus";
+import { TicketResponse } from "@/types/ticketType";
 
-import { Content } from "@/types/entryType";
+import TicketStatus from "./TicketStatus";
 
-export type Entry = Content;
+export type Entry = TicketResponse;
 
 export const columns: ColumnDef<Entry>[] = [
   {
-    accessorKey: "enterTime",
-    header: () => <div>입장 시간</div>,
-  },
-  {
-    accessorKey: "name",
+    accessorKey: "depositorName",
     header: "입금자명",
   },
   {
-    accessorKey: "ticketDate",
+    accessorKey: "userType",
+    header: "사용자 구분",
+  },
+  {
+    accessorKey: "showTime",
     header: "티켓 날짜",
   },
   {
-    accessorKey: "phoneNumber",
+    accessorKey: "telephone",
     header: "전화번호",
   },
   {
+    accessorKey: "updatedDate",
+    header: "업데이트 일시",
+  },
+  {
+    accessorKey: "orderDate",
+    header: "주문 일시",
+  },
+  {
     accessorKey: "ticketStatus",
-    header: () => <div>결과</div>,
+    header: () => <div>티켓 상태</div>,
     cell: ({ row }) => {
-      const ticketStatus = TICKET_STATUS.find(
-        item => item.value === row.getValue("ticketStatus"),
-      );
+      const ticketId = row.original.ticketId;
+      const ticketStatus = row.original.ticketStatus;
+      const depositorName = row.original.depositorName;
 
       return (
-        <div className="rounded-lg bg-[#F0EDFD] py-1 text-sm font-medium text-[#7250FD]">
-          {ticketStatus!.text}
-        </div>
+        <TicketStatus
+          id={ticketId}
+          status={ticketStatus}
+          userName={depositorName}
+          page={row.index + 1}
+        />
       );
+    },
+  },
+  {
+    accessorKey: "friend",
+    header: "친구",
+    cell: ({ row }) => {
+      return <div>{row.original.formAnswers[0].answer}</div>;
     },
   },
 ];
@@ -71,7 +89,7 @@ interface DataTableProps<TData, TValue> {
   pageCount: number;
 }
 
-function EntryDataTable<TData, TValue>({
+function BookingTable<TData, TValue>({
   columns,
   data,
   pageIndex,
@@ -131,7 +149,7 @@ function EntryDataTable<TData, TValue>({
   return (
     <div className="relative">
       <main className="rounded-lg bg-white shadow-sm">
-        <section className="px-3 pb-6 pr-14 pt-3">
+        <section className="px-3 pb-6 pt-3">
           <Table>
             <TableHeader className="[&_tr]:border-none">
               {table.getHeaderGroups().map(headerGroup => (
@@ -244,4 +262,4 @@ function EntryDataTable<TData, TValue>({
   );
 }
 
-export default EntryDataTable;
+export default BookingTable;
