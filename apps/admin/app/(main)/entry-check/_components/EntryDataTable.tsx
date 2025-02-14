@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { cn } from "@ui/lib/utils";
 import {
   Table,
   TableBody,
@@ -8,12 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@ui/components/ui/table";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
-} from "@ui/components/ui/icon";
 import { Button } from "@ui/components/ui/button";
 import {
   ColumnDef,
@@ -26,6 +19,13 @@ import {
 import { TICKET_STATUS } from "@/constants/ticketStatus";
 
 import { Content } from "@/types/entryType";
+import { cn } from "@ui/lib/utils";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+} from "@ui/components/ui/icon";
 
 export type Entry = Content;
 
@@ -94,7 +94,7 @@ function EntryDataTable<TData, TValue>({
   });
 
   const [pageGroup, setPageGroup] = useState(0);
-  const maxButtons = 5;
+  const maxButtons = 2;
 
   const handleFirst = () => {
     setPageGroup(0);
@@ -130,7 +130,7 @@ function EntryDataTable<TData, TValue>({
 
   return (
     <div className="relative">
-      <main className="rounded-lg bg-white shadow-sm">
+      <main className="flex grow flex-col gap-8 rounded-lg bg-white shadow-sm">
         <section className="px-3 pb-6 pr-14 pt-3">
           <Table>
             <TableHeader className="[&_tr]:border-none">
@@ -165,7 +165,7 @@ function EntryDataTable<TData, TValue>({
                     {row.getVisibleCells().map(cell => (
                       <TableCell
                         key={cell.id}
-                        className="p-3 text-center text-base font-medium text-[#5E5E6E]"
+                        className="text-center text-base font-medium text-[#5E5E6E]"
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
